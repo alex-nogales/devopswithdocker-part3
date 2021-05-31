@@ -14,3 +14,17 @@ Submit a link to the repository with the config.
 
 #### Link submited
 `https://testingapponetwo.herokuapp.com`
+
+### 3.2 Building images inside of a container
+Watchtower uses volume to docker.sock socket to access Docker daemon of the host from the container. By leveraging this ourselves we can create our own simple build service.
+Create a project that downloads a repository from github, builds a Dockerfile located in the root and then publishes it into Docker Hub.
+You can use any programming language / technology for the project implementation. A simple bash script is viable
+Then create a Dockerfile for it so that it can be run inside a container.
+Make sure that it can build at least some of the example projects.
+
+### 3.3
+**This exercise is mandatory** 
+In the previous parts we created Dockerfiles for both example frontend and backend.
+Security issues with the user being a root are serious for the example frontend and backend as the containers for web services are supposed to be accessible through the internet.
+Make sure the containers start their processes as a non-root user.
+> TIP `man chown` may help you if you have access errors
