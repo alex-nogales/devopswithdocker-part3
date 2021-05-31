@@ -28,3 +28,8 @@ In the previous parts we created Dockerfiles for both example frontend and backe
 Security issues with the user being a root are serious for the example frontend and backend as the containers for web services are supposed to be accessible through the internet.
 Make sure the containers start their processes as a non-root user.
 > TIP `man chown` may help you if you have access errors
+
+### 3.4
+Return back to our frontend & backend Dockerfiles and you should see the some mistakes we now know to fix.
+Document both image sizes at this point, as was done in the material. Optimize the Dockerfiles of both programs, frontend and backend, by joining the RUN commands and removing useless parts.
+After your improvements document the image sizes again. The size difference may not be very much yet. The frontend should be around 432MB when using `FROM ubuntu:18.04`. The backend should be around 351MB. The sizes may vary.
