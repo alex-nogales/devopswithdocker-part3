@@ -33,3 +33,27 @@ Make sure the containers start their processes as a non-root user.
 Return back to our frontend & backend Dockerfiles and you should see the some mistakes we now know to fix.
 Document both image sizes at this point, as was done in the material. Optimize the Dockerfiles of both programs, frontend and backend, by joining the RUN commands and removing useless parts.
 After your improvements document the image sizes again. The size difference may not be very much yet. The frontend should be around 432MB when using `FROM ubuntu:18.04`. The backend should be around 351MB. The sizes may vary.
+
+### 3.5
+Document the image size before the changes.
+Let’s test what the image sizes are when using FROM golang and FROM node in the backend and frontend projects respectively.
+Return back to our frontend & backend Dockerfiles and change the FROM to something more suitable. Both should have at least alpine variants ready in DockerHub. Make sure the application still works after the changes.
+Document the size after your changes.
+
+>> My Backend already uses golang:alpine, so no changes there
+#### Command used:
+```
+% docker build -t example-frontend:alpine -f Dockerfile.alpine .
+% docker container run -it -p 5000:5000 example-frontend:alpine
+```
+
+### 3.6: Multi-stage frontend
+Multi-stage builds. Lets do a multi-stage build for the frontend project since we’ve come so far with the application.
+Even though multi-stage builds are designed mostly for binaries in mind, we can leverage the benefits with our frontend project as having original source code with the final assets makes little sense. Build it with the instructions in README and the built assets should be in build folder.
+You can still use the serve to serve the static files or try out something else.
+
+#### Command used:
+```
+% docker build -t example-frontend:alpinev2 -f Dockerfile.alpine.v2 .
+% docker container run -it -p 5000:5000 example-frontend:alpinev2
+```
