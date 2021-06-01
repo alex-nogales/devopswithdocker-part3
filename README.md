@@ -70,3 +70,8 @@ To pass the exercise the image must be smaller than **25MB**.
 % docker build -t example-backend:scratch -f Dockerfile.scratch .
 % docker container run -it -p 8080:8080 example-backend:scratch
 ```
+
+### 3.7
+Do all or most of the optimizations from security to size for any other Dockerfile you have access to, in your own project or for example the ones used in previous “standalone” exercises. Please document Dockerfiles both before and after.
+
+>> Already did everything on the backend part of the 3.6 excercise 
