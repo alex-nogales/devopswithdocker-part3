@@ -1,0 +1,46 @@
+FROM golang:alpine AS builder
+
+# git install
+RUN apk update && apk add --no-cache git
+
+# create app user
+# tips at https://stackoverflow.com/a/55757473/12429735RUN
+ENV USER=appuser
+ENV UID=10001
+
+RUN adduser \    
+    --disabled-password \    
+    --gecos "" \    
+    --home "/nonexistent" \    
+    --shell "/sbin/nologin" \    
+    --no-create-home \    
+    --uid "${UID}" \    
+    "${USER}"
+
+# define workdir and copy the app and open port
+WORKDIR $GOPATH/src/myapp/
+COPY . .
+# Fetch dependencies using go get
+RUN go get -d -v
+
+# build the binary files
+RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/server 
+
+# build the smallest image 
+FROM scratch
+
+# import user and group from builder
+COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /etc/group /etc/group
+
+# copy the excecutable binnary
+COPY --from=builder /go/bin/server /go/bin/server
+
+# use unprivileged user
+USER appuser:appuser
+
+# port exposed for the service to work
+EXPOSE 8080
+
+# run the server binary
+ENTRYPOINT [ "/go/bin/server" ]

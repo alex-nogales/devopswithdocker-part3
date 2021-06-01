@@ -47,7 +47,7 @@ Document the size after your changes.
 % docker container run -it -p 5000:5000 example-frontend:alpine
 ```
 
-### 3.6: Multi-stage frontend
+### 3.6.1: Multi-stage frontend
 Multi-stage builds. Lets do a multi-stage build for the frontend project since we’ve come so far with the application.
 Even though multi-stage builds are designed mostly for binaries in mind, we can leverage the benefits with our frontend project as having original source code with the final assets makes little sense. Build it with the instructions in README and the built assets should be in build folder.
 You can still use the serve to serve the static files or try out something else.
@@ -56,4 +56,17 @@ You can still use the serve to serve the static files or try out something else.
 ```
 % docker build -t example-frontend:alpinev2 -f Dockerfile.alpine.v2 .
 % docker container run -it -p 5000:5000 example-frontend:alpinev2
+```
+
+### 3.6.2: Multi-stage backend
+Lets do a multi-stage build for the backend project since we’ve come so far with the application.
+The project is in golang and building a binary that runs in a container, while straightforward, isn’t exactly trivial. Use resources that you have available (Google, example projects) to build the binary and run it inside a container that uses `FROM scratch`.
+To pass the exercise the image must be smaller than **25MB**.
+
+>> Evidence of every image size at []()
+
+#### Command used:
+```
+% docker build -t example-backend:scratch -f Dockerfile.scratch .
+% docker container run -it -p 8080:8080 example-backend:scratch
 ```
