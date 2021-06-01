@@ -63,7 +63,7 @@ Lets do a multi-stage build for the backend project since we’ve come so far wi
 The project is in golang and building a binary that runs in a container, while straightforward, isn’t exactly trivial. Use resources that you have available (Google, example projects) to build the binary and run it inside a container that uses `FROM scratch`.
 To pass the exercise the image must be smaller than **25MB**.
 
->> Evidence of every image size at []()
+>> Evidence of every image size at [exercise 3.6 dir](https://github.com/rndmz451/devopswithdocker-part3/tree/main/exercise%203.6)
 
 #### Command used:
 ```
